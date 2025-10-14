@@ -6,8 +6,8 @@ A minimal, fully testable **text editor with Undo/Redo** built in Python.
 - Functional core using **Command Pattern**
 - Two-stack **Undo/Redo** manager
 - **CLI** (Typer) and **REST API** (FastAPI)
-- Optional **TUI** (Textual)
-- Optional **Semantic Vector Search** & AI extensions (embeddings, quantization, retrieval)
+- **TUI** (Textual)
+- **Semantic Vector Search** & AI extensions (embeddings, quantization, retrieval)
 
 ## Concept
 This editor records every action (insert, delete, replace) as a reversible command.
