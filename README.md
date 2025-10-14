@@ -13,8 +13,7 @@ A minimal, fully testable **text editor with Undo/Redo** built in Python.
 This editor records every action (insert, delete, replace) as a reversible command.
 It can undo or redo any change, similar to MS Word, but built from scratch.
 
-Optional modules let it understand text *semantically* using **vector embeddings** —
-so it can search or summarize by meaning.
+modules let it understand text *semantically* using **vector embeddings** — so it can search or summarize by meaning.
 
 ## Quickstart
 ```bash
