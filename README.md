@@ -1,0 +1,26 @@
+# TextEditor-AI
+
+A minimal, fully testable **text editor with Undo/Redo** built in Python.
+
+## Features
+- Functional core using **Command Pattern**
+- Two-stack **Undo/Redo** manager
+- **CLI** (Typer) and **REST API** (FastAPI)
+- Optional **TUI** (Textual)
+- Optional **Semantic Vector Search** & AI extensions (embeddings, quantization, retrieval)
+
+## Concept
+This editor records every action (insert, delete, replace) as a reversible command.
+It can undo or redo any change, similar to MS Word, but built from scratch.
+
+Optional modules let it understand text *semantically* using **vector embeddings** —
+so it can search or summarize by meaning.
+
+## Quickstart
+```bash
+git clone https://github.com/<yourusername>/texteditor-ai.git
+cd textedit-ai
+pip install -r requirements.txt
+python -m textedit.api.cli insert "hello"
+
+
