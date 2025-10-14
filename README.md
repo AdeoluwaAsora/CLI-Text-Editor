@@ -17,7 +17,7 @@ modules let it understand text *semantically* using **vector embeddings** — so
 
 ## Quickstart
 ```bash
-git clone https://github.com/<yourusername>/texteditor-ai.git
+git clone git@github.com:AdeoluwaAsora/Text-Editor-Ai.git
 cd textedit-ai
 pip install -r requirements.txt
 python -m textedit.api.cli insert "hello"
