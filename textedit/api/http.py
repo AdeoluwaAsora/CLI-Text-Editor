@@ -3,10 +3,40 @@ from pydantic import BaseModel
 import os
 from textedit.persist.storage import PersistentUndoRedo, DEFAULT_PATH
 from textedit.core.commands import InsertText, DeleteRange, ReplaceRange, MoveCursor
+from textedit.semvec.index import SimpleIndex
+
 
 app = FastAPI(title="TextEdit API", version="0.1.0")
 STATE_FILE = os.environ.get("TEXTEDIT_STATE_FILE", DEFAULT_PATH)
 mgr = PersistentUndoRedo(STATE_FILE)
+
+index = SimpleIndex()
+def _doc_chunks():
+    # simple line-based chunking; upgrade later to paragraphs
+    return [ln for ln in mgr.state.text.splitlines() if ln.strip()]
+
+def rebuild_index():
+    index.__init__()  # reset
+    chunks = _doc_chunks()
+    if chunks:
+        index.add(chunks)
+
+class SearchReq(BaseModel):
+    query: str
+    k: int = 5
+
+
+@app.post("/reindex")
+def reindex():
+    rebuild_index()
+    return {"chunks": len(index.texts)}
+
+@app.post("/semantic_search")
+def semantic_search(req: SearchReq):
+    if not getattr(index, "texts", []):
+        rebuild_index()
+    hits = index.search(req.query, k=req.k)
+    return [{"rank": r+1, "score": s, "text": t} for r, (_, s, t) in enumerate(hits)]
 
 # --- Request models ---
 class InsertReq(BaseModel):
